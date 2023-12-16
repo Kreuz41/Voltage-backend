@@ -1,0 +1,34 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  fp:
+    build:
+      context: "E:\\Projects\\DotNet\\FP-backend"
+      dockerfile: "FP/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "/riderDebugger/linux-x64/dotnet/dotnet"
+    - "/riderDebugger/JetBrains.Debugger.Worker.exe"
+    - "--mode=server"
+    - "--frontend-port=57100"
+    - "--backend-port=57300"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+      NUGET_PACKAGES: "C:\\Users\\vorob\\.nuget\\packages"
+      NUGET_FALLBACK_PACKAGES: "C:\\Users\\vorob\\.nuget\\packages"
+      RIDER_DEBUGGER_LOG_DIR: "/riderLogs"
+      RESHARPER_LOG_CONF: "/riderLogsConf/backend-log.xml"
+    image: "fp:dev"
+    ports:
+    - "127.0.0.1:57004:57100"
+    - "127.0.0.1:57204:57300"
+    volumes:
+    - "C:\\Users\\vorob\\.nuget\\packages:/root/.nuget/fallbackpackages"
+    - "E:\\Projects\\DotNet\\FP-backend\\FP:/app:rw"
+    - "E:\\Projects\\DotNet\\FP-backend:/src:rw"
+    - "C:\\Users\\vorob\\AppData\\Local\\JetBrains\\RiderRemoteDebugger\\2023.2.3\\\
+      Linux64:/riderDebugger"
+    - "E:\\Programs\\JetBrains Rider 2023.2.3/bin:/riderLogsConf"
+    - "C:\\Users\\vorob\\AppData\\Local\\JetBrains\\Rider2023.2\\log\\DebuggerWorker\\\
+      JetBrains.Debugger.Worker.2023_11_21_23_54_44:/riderLogs:rw"
+    working_dir: "/app"
